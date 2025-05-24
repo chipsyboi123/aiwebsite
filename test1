@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-T">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Gen Wealth Websites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Georgia&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #1a237e 0%, #0d123e 100%);
+            color: white;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        .hero-tagline {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        @media (max-width: 768px) {
+            .hero-tagline {
+                font-size: 2.25rem;
+            }
+        }
+        .style-showcase-section {
+            padding: 4rem 0; /* Adjusted padding */
+            background-color: #ffffff;
+        }
+        .style-showcase-heading {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+            text-align: center; /* Ensure heading is centered */
+             padding: 0 1rem; /* Add padding for small screens */
+        }
+        .style-showcase-subheading {
+            font-size: 1.125rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center; /* Ensure subheading is centered */
+            padding: 0 1rem; /* Add padding for small screens */
+        }
+
+        /* Container for the auto-scrolling marquee */
+        .marquee-viewport {
+            width: 100%;
+            overflow: hidden; /* Crucial: Hides the parts of the content that are outside the viewport */
+            padding: 1rem 0; /* Add some vertical padding if needed */
+        }
+
+        .scrolling-wrapper {
+            display: flex; /* Lays out items in a row */
+            width: fit-content; /* Wrapper width based on its content */
+            animation: scrollHorizontal 45s linear infinite; /* Adjusted duration for potentially wider content */
+        }
+
+        .marquee-viewport:hover .scrolling-wrapper {
+            animation-play-state: paused; /* Pause animation on hover */
+        }
+
+        @keyframes scrollHorizontal {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                /* Translate by the width of one set of original items */
+                /* Each item: 380px width + 32px margin-right = 412px */
+                /* 3 items: 3 * 412px = 1236px. Re-calculate if item widths change. */
+                transform: translateX(-1236px); /* This value might need slight adjustment if content makes boxes wider */
+            }
+        }
+
+        .style-box {
+            border-radius: 0.75rem;
+            color: white;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex: 0 0 380px; /* Fixed width for each box */
+            min-height: 550px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-right: 2rem; /* Gap between items (32px) */
+        }
+
+        .style-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .style-box-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .mini-website-preview {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .style-box .explore-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 0.75rem;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .style-box:hover .explore-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .style-description-area {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+            background-color: rgba(0,0,0,0.1);
+        }
+        .style-box h3 { /* Title below mini-website */
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .style-box .description-text { /* Description text below mini-website */
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            flex-grow: 0;
+        }
+        .know-more-btn {
+            padding: 0.6rem 1.25rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: inline-block;
+            align-self: flex-start;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* --- Mini-Website Specific Styles --- */
+        .mini-website-preview-inner { /* Common inner wrapper for all mini-sites */
+            border-radius: 0.375rem;
+            margin: 0.75rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* --- Styles for "Timeless Elegance & Trust" (.box-classic) --- */
+        .box-classic { background-color: #0a2342; }
+        .box-classic .mini-website-preview-inner { background-color: #f7f5f2; font-family: 'Georgia', serif; } /* Cambria-like font */
+        .box-classic .mini-header {
+            background-color: #0a2342; padding: 0.4rem 0.6rem; border-bottom: 2px solid #daa520;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .box-classic .mini-logo { font-size: 0.75rem; font-weight: bold; color: #daa520; }
+        .box-classic .mini-nav a { color: #f0e68c; font-size: 0.6rem; margin-left: 0.4rem; text-decoration: none; }
+        .box-classic .mini-nav a:hover { text-decoration: underline; }
+        .box-classic .mini-hero {
+            text-align: center; background-color: #e0e0e0; position: relative;
+            display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 160px;
+        }
+        .box-classic .mini-hero img { width: 100%; height: 100%; max-height: 180px; object-fit: cover; display: block; }
+        .box-classic .mini-content-area { padding: 0.8rem; font-size: 0.68rem; color: #2c2c2c; flex-grow: 1; background-color: #f7f5f2; line-height: 1.5;}
+        .box-classic .mini-content-area h5 { font-size: 0.8rem; font-weight: 600; color: #0a2342; margin-bottom: 0.4rem; border-bottom: 1px solid #daa520; padding-bottom: 0.2rem;}
+        .box-classic .mini-content-area p { margin-bottom: 0.5rem; }
+        .box-classic .mini-content-area ul { list-style: disc; margin-left: 1rem; margin-bottom: 0.6rem; }
+        .box-classic .mini-content-area li { margin-bottom: 0.2rem; }
+        .box-classic .mini-footer { background-color: #0a2342; color: #f0e68c; font-size: 0.55rem; text-align: center; padding: 0.3rem; }
+        .box-classic .style-description-area { background-color: #081c33; }
+        .box-classic .style-description-area h3, .box-classic .style-description-area .description-text { color: #f0e68c; }
+        .box-classic .know-more-btn { background-color: #daa520; color: #0a2342; }
+        .box-classic .know-more-btn:hover { background-color: #c89319; }
+
+
+        /* --- Styles for "Vibrant Engagement & Clarity" (.box-colorful) --- */
+        .box-colorful { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); }
+        .box-colorful .mini-website-preview-inner { background-color: #ffffff; font-family: 'Inter', sans-serif; }
+        .box-colorful .mini-header {
+            background-color: #ffffff; padding: 0.5rem 0.75rem; border-bottom: 2px solid #eeeeee;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .box-colorful .mini-logo { font-size: 0.8rem; font-weight: bold; color: #2575fc; }
+        .box-colorful .mini-nav a { color: #4a5568; font-size: 0.65rem; margin-left: 0.5rem; text-decoration: none; font-weight: 500; }
+        .box-colorful .mini-nav a:hover { color: #2575fc; }
+        .box-colorful .mini-hero {
+            padding: 1.5rem 1rem; text-align: center; background: linear-gradient(135deg, #f0f2f5 0%, #e0e7ff 100%);
+            min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .box-colorful .mini-hero img {
+            width: 70px; height: 70px; object-fit: contain; margin-bottom: 0.75rem;
+            background-color: rgba(255,255,255,0.5); border-radius: 0.375rem; padding: 0.25rem;
+        }
+        .box-colorful .mini-hero h4 { font-size: 1.1rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.25rem; }
+        .box-colorful .mini-hero p { font-size: 0.75rem; color: #374151; line-height: 1.4; max-width: 80%; }
+        .box-colorful .mini-content-area { padding: 1rem; font-size: 0.75rem; color: #333; flex-grow: 1; background-color: #ffffff; }
+        .box-colorful .mini-content-area h5 { font-size: 0.9rem; font-weight: 600; color: #6a11cb; margin-bottom: 0.5rem; }
+        .box-colorful .mini-content-area p { margin-bottom: 0.75rem; line-height: 1.6; }
+        .box-colorful .mini-content-area .feature-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .box-colorful .mini-content-area .feature-item { background-color: #f0f2f5; color: #2575fc; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.65rem; font-weight: 500;}
+        .box-colorful .mini-footer { background-color: #f0f2f5; color: #4a5568; font-size: 0.6rem; text-align: center; padding: 0.4rem; border-top: 1px solid #e5e7eb;}
+        .box-colorful .style-description-area { background-color: rgba(0,0,0,0.1); }
+        .box-colorful .style-description-area h3, .box-colorful .style-description-area .description-text { color: #ffffff; }
+        .box-colorful .know-more-btn { background-color: #ffffff; color: #6a11cb; }
+        .box-colorful .know-more-btn:hover { background-color: #f0f0f0; }
+
+
+        /* --- Styles for "Tech-y" (.box-techy) --- */
+        .box-techy { background-color: #1a1a2e; border: 1px solid #00e5ff; }
+        .box-techy::before { /* Grid lines for the outer box */
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(0, 229, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.07) 1px, transparent 1px);
+            background-size: 20px 20px; pointer-events: none; z-index: 0;
+        }
+        .box-techy > .style-box-content-wrapper > * { position: relative; z-index: 1; } /* Ensure content is above grid */
+        .box-techy .mini-website-preview-inner {
+            background-color: #0f0f22; /* Darker inner background */
+            font-family: 'Roboto Mono', monospace; /* Monospace font for tech feel */
+            color: #00e5ff; /* Cyan text */
+            border: 1px solid #007a8a; /* Darker cyan border for inner preview */
+        }
+        .box-techy .mini-header {
+            background-color: #14142a; padding: 0.4rem 0.6rem; border-bottom: 1px solid #00e5ff;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .box-techy .mini-logo { font-size: 0.8rem; font-weight: 500; color: #00e5ff; letter-spacing: 1px; }
+        .box-techy .mini-nav a { color: #00c4dd; font-size: 0.65rem; margin-left: 0.5rem; text-decoration: none; }
+        .box-techy .mini-nav a:hover { color: #ffffff; text-shadow: 0 0 5px #00e5ff; }
+        .box-techy .mini-hero {
+            padding: 1rem; text-align: center; background-color: #0a0a18; /* Even darker for hero */
+            min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
+        }
+        .box-techy .mini-hero img { /* Placeholder for tech graphic */
+            width: 80px; height: 80px; object-fit: contain; margin-bottom: 0.75rem;
+            /* filter: drop-shadow(0 0 8px #00e5ff); */ /* Optional glow effect */
+        }
+        .box-techy .mini-hero h4 { font-size: 1rem; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem; text-shadow: 0 0 8px #00e5ff; }
+        .box-techy .mini-hero p { font-size: 0.7rem; color: #a0e0ff; line-height: 1.4; }
+
+        .box-techy .mini-content-area { padding: 1rem; font-size: 0.7rem; color: #c0f0ff; flex-grow: 1; background-color: #0f0f22; }
+        .box-techy .mini-content-area h5 { font-size: 0.85rem; font-weight: 500; color: #00e5ff; margin-bottom: 0.6rem; border-bottom: 1px solid rgba(0, 229, 255, 0.5); padding-bottom: 0.3rem;}
+        .box-techy .mini-content-area p { margin-bottom: 0.75rem; line-height: 1.6; }
+        .box-techy .mini-content-area .data-point {
+            background-color: rgba(0, 229, 255, 0.1); border-left: 3px solid #00e5ff;
+            padding: 0.5rem; margin-bottom: 0.5rem; font-size: 0.65rem;
+        }
+        .box-techy .mini-content-area .data-point strong { color: #ffffff; }
+
+        .box-techy .mini-footer { background-color: #14142a; color: #00c4dd; font-size: 0.6rem; text-align: center; padding: 0.4rem; border-top: 1px solid #007a8a;}
+        .box-techy .style-description-area { background-color: rgba(0, 229, 255, 0.05); }
+        .box-techy .style-description-area h3 { color: #00e5ff; }
+        .box-techy .style-description-area .description-text { color: #e0e0e0; }
+        .box-techy .know-more-btn { background-color: #00e5ff; color: #1a1a2e; }
+        .box-techy .know-more-btn:hover { background-color: #00c4dd; }
+
+    </style>
+</head>
+<body>
+
+    <section class="hero-section">
+        <div class="container mx-auto px-4">
+            <h1 class="hero-tagline">
+                Sculpting the Future of Digital Wealth.
+            </h1>
+            <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
+                We design and develop next-generation websites for wealth management firms, blending cutting-edge technology with intuitive user experiences to elevate your digital presence.
+            </p>
+        </div>
+    </section>
+
+    <section class="style-showcase-section">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4 style-showcase-heading">Explore Our Visionary Styles</h2>
+            <p class="text-center text-gray-600 mb-12 text-lg max-w-3xl mx-auto style-showcase-subheading">
+                Our design philosophies in continuous motion. Hover to pause and explore each concept.
+            </p>
+        </div>
+        <div class="marquee-viewport">
+            <div class="scrolling-wrapper">
+                <div class="style-box box-classic">
+                    <div class="style-box-content-wrapper">
+                        <div class="mini-website-preview">
+                            <div class="mini-website-preview-inner">
+                                <div class="mini-header">
+                                    <span class="mini-logo">Legacy Wealth Inc.</span>
+                                    <nav class="mini-nav">
+                                        <a href="#">Home</a>
+                                        <a href="#">About Us</a>
+                                        <a href="#">Services</a>
+                                        <a href="#">Philosophy</a>
+                                        <a href="#">Contact</a>
+                                    </nav>
+                                </div>
+                                <div class="mini-hero">
+                                    <img src="istockphoto-1455167761-2048x2048.jpg" alt="Wealth management clients meeting">
+                                </div>
+                                <div class="mini-content-area">
+                                    <h5>Our Enduring Commitment</h5>
+                                    <p>For generations, we have been the steadfast guardians of our clients' prosperity, offering bespoke financial strategies rooted in deep market understanding and unwavering integrity. Our approach is both personal and profound.</p>
+                                    <ul>
+                                        <li>Personalized Portfolio Management</li>
+                                        <li>Transparent Fee Structures</li>
+                                        <li>Dedicated Advisory Teams</li>
+                                        <li>Comprehensive Estate Planning</li>
+                                    </ul>
+                                    <p>Building and preserving lasting legacies through prudent financial stewardship and exceptional client service is not just our business; it's our promise.</p>
+                                </div>
+                                <div class="mini-footer">
+                                    &copy; 2025 Legacy Wealth Inc. Trust. Tradition. Tomorrow.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="style-description-area">
+                            <h3>Timeless Elegance &amp; Trust</h3>
+                            <p class="description-text">A sophisticated, classic approach combining deep blues with luxurious gold accents. For firms emphasizing heritage and premium service.</p>
+                            <a href="#" class="know-more-btn">Know More</a>
+                        </div>
+                    </div>
+                    <div class="explore-overlay">Explore This Style</div>
+                </div>
+
+                <div class="style-box box-colorful">
+                    <div class="style-box-content-wrapper">
+                        <div class="mini-website-preview">
+                           <div class="mini-website-preview-inner">
+                                <div class="mini-header">
+                                    <span class="mini-logo">InnovateWealth</span>
+                                    <nav class="mini-nav">
+                                        <a href="#">Solutions</a>
+                                        <a href="#">Insights</a>
+                                        <a href="#">Platform</a>
+                                        <a href="#">Join Us</a>
+                                    </nav>
+                                </div>
+                                <div class="mini-hero">
+                                     <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt="InnovateWealth Abstract Graphic">
+                                    <h4>Future-Forward Financials</h4>
+                                    <p>Navigate your wealth journey with clarity and confidence.</p>
+                                </div>
+                                <div class="mini-content-area">
+                                    <h5>Experience the Difference:</h5>
+                                    <p>We empower you with intuitive digital tools and transparent insights, making complex financial decisions simpler and more engaging. Our platform is designed for your life, your goals.</p>
+                                    <div class="feature-list">
+                                        <span class="feature-item">Interactive Dashboards</span>
+                                        <span class="feature-item">Goal Tracking</span>
+                                        <span class="feature-item">24/7 Access</span>
+                                        <span class="feature-item">Secure Messaging</span>
+                                    </div>
+                                </div>
+                                <div class="mini-footer">
+                                    InnovateWealth &copy; 2025. Your Vision, Amplified.
+                                </div>
+                           </div>
+                        </div>
+                        <div class="style-description-area">
+                            <h3>Vibrant Engagement &amp; Clarity</h3>
+                            <p class="description-text">Dynamic and approachable, using a modern, colorful palette for an inviting user experience. Ideal for forward-thinking firms.</p>
+                            <a href="#" class="know-more-btn">Know More</a>
+                        </div>
+                    </div>
+                    <div class="explore-overlay">Explore This Style</div>
+                </div>
+
+                <div class="style-box box-techy">
+                     <div class="style-box-content-wrapper">
+                        <div class="mini-website-preview">
+                            <div class="mini-website-preview-inner">
+                                <div class="mini-header">
+                                    <span class="mini-logo">QuantumLeap AI</span>
+                                    <nav class="mini-nav">
+                                        <a href="#">Alpha</a>
+                                        <a href="#">Sigma</a>
+                                        <a href="#">Omega</a>
+                                        <a href="#">API</a>
+                                    </nav>
+                                </div>
+                                <div class="mini-hero">
+                                     <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL-AI&font=robomono" alt="QuantumLeap AI Abstract Graphic">
+                                    <h4>AI-Driven Wealth Intelligence</h4>
+                                    <p>Unlocking alpha with predictive analytics.</p>
+                                </div>
+                                <div class="mini-content-area">
+                                    <h5>System Online: Portfolio Optimization</h5>
+                                    <p>Real-time data ingestion. Predictive models recalibrating... Market sentiment: Neutral-Positive. Volatility index: Low.</p>
+                                    <div class="data-point"><strong>Asset Allocation:</strong> Dynamic shift towards growth.</div>
+                                    <div class="data-point"><strong>Risk Matrix:</strong> All parameters within defined thresholds.</div>
+                                </div>
+                                <div class="mini-footer">
+                                    QuantumLeap AI // Secure Connection Established
+                                </div>
+                            </div>
+                        </div>
+                        <div class="style-description-area">
+                            <h3>AI-Powered Future Finance</h3>
+                            <p class="description-text">Cutting-edge and innovative, with sleek dark themes and data-driven visuals. For firms leveraging AI to redefine wealth management.</p>
+                            <a href="#" class="know-more-btn">Know More</a>
+                        </div>
+                    </div>
+                    <div class="explore-overlay">Explore This Style</div>
+                </div>
+
+                <div class="style-box box-classic" aria-hidden="true">
+                    <div class="style-box-content-wrapper">
+                        <div class="mini-website-preview">
+                            <div class="mini-website-preview-inner">
+                                <div class="mini-header">
+                                    <span class="mini-logo">Legacy Wealth Inc.</span>
+                                    <nav class="mini-nav">
+                                        <a href="#">Home</a>
+                                        <a href="#">About Us</a>
+                                        <a href="#">Services</a>
+                                        <a href="#">Philosophy</a>
+                                        <a href="#">Contact</a>
+                                    </nav>
+                                </div>
+                                <div class="mini-hero">
+                                    <img src="istockphoto-1455167761-2048x2048.jpg" alt="">
+                                </div>
+                                <div class="mini-content-area">
+                                    <h5>Our Enduring Commitment</h5>
+                                    <p>For generations, we have been the steadfast guardians of our clients' prosperity, offering bespoke financial strategies rooted in deep market understanding and unwavering integrity. Our approach is both personal and profound.</p>
+                                    <ul>
+                                        <li>Personalized Portfolio Management</li>
+                                        <li>Transparent Fee Structures</li>
+                                        <li>Dedicated Advisory Teams</li>
+                                        <li>Comprehensive Estate Planning</li>
+                                    </ul>
+                                    <p>Building and preserving lasting legacies through prudent financial stewardship and exceptional client service is not just our business; it's our promise.</p>
+                                </div>
+                                <div class="mini-footer">
+                                     &copy; 2025 Legacy Wealth Inc. Trust. Tradition. Tomorrow.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="style-description-area">
+                            <h3>Timeless Elegance &amp; Trust</h3>
+                            <p class="description-text">A sophisticated, classic approach combining deep blues with luxurious gold accents. For firms emphasizing heritage and premium service.</p>
+                            <a href="#" class="know-more-btn">Know More</a>
+                        </div>
+                    </div>
+                    <div class="explore-overlay">Explore This Style</div>
+                </div>
+
+                <div class="style-box box-colorful" aria-hidden="true">
+                    <div class="style-box-content-wrapper">
+                        <div class="mini-website-preview">
+                           <div class="mini-website-preview-inner">
+                                <div class="mini-header">
+                                    <span class="mini-logo">InnovateWealth</span>
+                                    <nav class="mini-nav">
+                                        <a href="#">Solutions</a>
+                                        <a href="#">Insights</a>
+                                        <a href="#">Platform</a>
+                                        <a href="#">Join Us</a>
+                                    </nav>
+                                </div>
+                                <div class="mini-hero">
+                                     <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt="">
+                                    <h4>Future-Forward Financials</h4>
+                                    <p>Navigate your wealth journey with clarity and confidence.</p>
+                                </div>
+                                <div class="mini-content-area">
+                                    <h5>Experience the Difference:</h5>
+                                    <p>We empower you with intuitive digital tools and transparent insights, making complex financial decisions simpler and more engaging. Our platform is designed for your life, your goals.</p>
+                                     <div class="feature-list">
+                                        <span class="feature-item">Interactive Dashboards</span>
+                                        <span class="feature-item">Goal Tracking</span>
+                                        <span class="feature-item">24/7 Access</span>
+                                        <span class="feature-item">Secure Messaging</span>
+                                    </div>
+                                </div>
+                                <div class="mini-footer">
+                                    InnovateWealth &copy; 2025. Your Vision, Amplified.
+                                </div>
+                           </div>
+                        </div>
+                        <div class="style-description-area">
+                            <h3>Vibrant Engagement &amp; Clarity</h3>
+                            <p class="description-text">Dynamic and approachable, using a modern, colorful palette for an inviting user experience. Ideal for forward-thinking firms.</p>
+                            <a href="#" class="know-more-btn">Know More</a>
+                        </div>
+                    </div>
+                    <div class="explore-overlay">Explore This Style</div>
+                </div>
+
+                <div class="style-box box-techy" aria-hidden="true">
+                     <div class="style-box-content-wrapper">
+                        <div class="mini-website-preview">
+                            <div class="mini-website-preview-inner">
+                                 <div class="mini-header">
+                                    <span class="mini-logo">QuantumLeap AI</span>
+                                    <nav class="mini-nav">
+                                        <a href="#">Alpha</a>
+                                        <a href="#">Sigma</a>
+                                        <a href="#">Omega</a>
+                                        <a href="#">API</a>
+                                    </nav>
+                                </div>
+                                <div class="mini-hero">
+                                     <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL-AI&font=robomono" alt="">
+                                    <h4>AI-Driven Wealth Intelligence</h4>
+                                    <p>Unlocking alpha with predictive analytics.</p>
+                                </div>
+                                <div class="mini-content-area">
+                                    <h5>System Online: Portfolio Optimization</h5>
+                                    <p>Real-time data ingestion. Predictive models recalibrating... Market sentiment: Neutral-Positive. Volatility index: Low.</p>
+                                    <div class="data-point"><strong>Asset Allocation:</strong> Dynamic shift towards growth.</div>
+                                    <div class="data-point"><strong>Risk Matrix:</strong> All parameters within defined thresholds.</div>
+                                </div>
+                                <div class="mini-footer">
+                                     QuantumLeap AI // Secure Connection Established
+                                </div>
+                            </div>
+                        </div>
+                        <div class="style-description-area">
+                            <h3>AI-Powered Future Finance</h3>
+                            <p class="description-text">Cutting-edge and innovative, with sleek dark themes and data-driven visuals. For firms leveraging AI to redefine wealth management.</p>
+                            <a href="#" class="know-more-btn">Know More</a>
+                        </div>
+                    </div>
+                    <div class="explore-overlay">Explore This Style</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center py-16">
+        <p class="text-gray-500">More sections to come...</p>
+    </div>
+
+</body>
+</html>
