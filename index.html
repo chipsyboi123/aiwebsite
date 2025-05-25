@@ -11,11 +11,55 @@
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
             color: #333;
+            padding-top: 64px; /* Adjust based on main navbar height */
         }
+
+        /* --- Main Navigation Bar --- */
+        .main-navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 0.75rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000; /* High z-index to stay on top */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+        .main-navbar .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a237e;
+        }
+        .main-navbar nav a {
+            color: #374151;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .main-navbar nav a:hover {
+            color: #1a237e;
+        }
+        .main-navbar .menu-toggle { /* For potential mobile menu */
+            display: none; /* Hidden on larger screens */
+            font-size: 1.5rem;
+            color: #1a237e;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .main-navbar nav { display: none; /* Hide nav links, show toggle */ }
+            .main-navbar .menu-toggle { display: block; }
+        }
+
+
         .hero-section {
             background: linear-gradient(135deg, #1a237e 0%, #0d123e 100%);
             color: white;
-            min-height: 60vh;
+            min-height: calc(60vh - 64px); /* Adjust for navbar */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -34,7 +78,7 @@
             }
         }
         .style-showcase-section {
-            padding: 4rem 0; /* Adjusted padding */
+            padding: 4rem 0;
             background-color: #ffffff;
         }
         .style-showcase-heading {
@@ -42,8 +86,8 @@
             font-weight: 700;
             color: #1a237e;
             margin-bottom: 0.5rem;
-            text-align: center; /* Ensure heading is centered */
-             padding: 0 1rem; /* Add padding for small screens */
+            text-align: center;
+            padding: 0 1rem;
         }
         .style-showcase-subheading {
             font-size: 1.125rem;
@@ -52,37 +96,26 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            text-align: center; /* Ensure subheading is centered */
-            padding: 0 1rem; /* Add padding for small screens */
+            text-align: center;
+            padding: 0 1rem;
         }
 
-        /* Container for the auto-scrolling marquee */
         .marquee-viewport {
             width: 100%;
-            overflow: hidden; /* Crucial: Hides the parts of the content that are outside the viewport */
-            padding: 1rem 0; /* Add some vertical padding if needed */
+            overflow: hidden;
+            padding: 1rem 0;
         }
-
         .scrolling-wrapper {
-            display: flex; /* Lays out items in a row */
-            width: fit-content; /* Wrapper width based on its content */
-            animation: scrollHorizontal 45s linear infinite; /* Adjusted duration for potentially wider content */
+            display: flex;
+            width: fit-content;
+            animation: scrollHorizontal 45s linear infinite;
         }
-
         .marquee-viewport:hover .scrolling-wrapper {
-            animation-play-state: paused; /* Pause animation on hover */
+            animation-play-state: paused;
         }
-
         @keyframes scrollHorizontal {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                /* Translate by the width of one set of original items */
-                /* Each item: 380px width + 32px margin-right = 412px */
-                /* 3 items: 3 * 412px = 1236px. Re-calculate if item widths change. */
-                transform: translateX(-1236px); /* This value might need slight adjustment if content makes boxes wider */
-            }
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-1236px); } /* (380px width + 32px margin) * 3 items */
         }
 
         .style-box {
@@ -94,473 +127,533 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            flex: 0 0 380px; /* Fixed width for each box */
-            min-height: 550px;
+            flex: 0 0 380px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-right: 2rem; /* Gap between items (32px) */
+            margin-right: 2rem;
+            cursor: pointer; 
         }
-
         .style-box:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-
-        .style-box-content-wrapper {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .mini-website-preview {
-            flex-grow: 1;
-            display: flex;
+        .style-box-content-wrapper { display: flex; flex-direction: column; height: 100%; }
+        
+        .mini-website-preview { 
+            display: flex; 
             flex-direction: column;
             overflow: hidden;
+            height: 240px; 
+        }
+        .mini-website-preview .mini-website-preview-inner { 
+            border-radius: 0.375rem; 
+            margin: 0.5rem; 
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; 
+            font-size: 0.5rem; 
+            line-height: 1.3; 
+        }
+        .mini-website-preview .mini-header { padding: 0.25rem 0.4rem !important; }
+        .mini-website-preview .mini-logo { font-size: 0.6rem !important; }
+        .mini-website-preview .mini-nav a { font-size: 0.45rem !important; margin-left: 0.25rem !important;}
+        .mini-website-preview .mini-hero { 
+            min-height: 60px !important; 
+            padding: 0.5rem !important; 
+        }
+        .mini-website-preview .mini-hero img { 
+            max-height: 50px !important; 
+            width: auto !important; 
+            margin-bottom: 0.25rem !important;
+        }
+        .mini-website-preview .box-colorful .mini-hero img { width: 30px !important; height: 30px !important; padding: 0.1rem !important;}
+        .mini-website-preview .box-techy .mini-hero img { width: 40px !important; height: 40px !important;}
+
+        .mini-website-preview .mini-hero h4 { font-size: 0.7rem !important; margin-bottom: 0.1rem !important; }
+        .mini-website-preview .mini-hero p { font-size: 0.5rem !important; line-height: 1.2 !important;}
+        .mini-website-preview .mini-content-area { padding: 0.5rem !important; font-size: 0.5rem !important; }
+        .mini-website-preview .mini-content-area h5 { font-size: 0.6rem !important; margin-bottom: 0.2rem !important; padding-bottom: 0.1rem !important;}
+        .mini-website-preview .mini-content-area h6 { font-size: 0.55rem !important; margin-top: 0.3rem !important; margin-bottom: 0.2rem !important;}
+        .mini-website-preview .mini-content-area p { margin-bottom: 0.25rem !important; }
+        .mini-website-preview .mini-content-area ul { margin-left: 0.5rem !important; margin-bottom: 0.25rem !important;}
+        .mini-website-preview .mini-content-area li { margin-bottom: 0.1rem !important; font-size:0.45rem !important;}
+        .mini-website-preview .mini-content-area .feature-item { font-size: 0.4rem !important; padding: 0.1rem 0.25rem !important; gap: 0.2rem !important;}
+        .mini-website-preview .mini-content-area .data-point { font-size: 0.45rem !important; padding: 0.25rem !important; margin-bottom: 0.2rem !important; border-left-width: 2px !important;}
+        .mini-website-preview .mini-footer { padding: 0.2rem !important; font-size: 0.4rem !important; }
+
+
+        .style-description-area { padding: 1rem 1.25rem; text-align: left; background-color: rgba(0,0,0,0.1); } 
+        .style-box h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; } 
+        .style-box .description-text { font-size: 0.8rem; line-height: 1.4; margin-bottom: 0.75rem; flex-grow: 0; } 
+
+
+        /* --- Expanded Style View --- */
+        .expanded-style-view-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); z-index: 1050; display: none;
+            align-items: flex-start; justify-content: center;
+            padding-top: 70px; padding-bottom: 1rem; overflow-y: auto;
+        }
+        .expanded-style-view-container {
+            background-color: #f7f5f2; width: 95%; max-width: 1400px;
+            min-height: 85vh; max-height: calc(100vh - 80px);
+            border-radius: 0.25rem; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative; display: flex; flex-direction: column; overflow: hidden;
+        }
+        .expanded-style-header {
+            padding: 0.5rem 1rem; border-bottom: 1px solid #daa520;
+            display: flex; justify-content: space-between; align-items: center;
+            background-color: #0a2342; color: #f0e68c; flex-shrink: 0;
+        }
+        .expanded-style-header h2 { font-size: 1.1rem; font-weight: 600; font-family: 'Georgia', serif; }
+        .expanded-style-close-btn {
+            font-size: 1.5rem; font-weight: bold; color: #f0e68c;
+            background: none; border: none; cursor: pointer; padding: 0.25rem 0.5rem;
+        }
+        .expanded-style-close-btn:hover { color: #ffffff; }
+        .expanded-style-content {
+            flex-grow: 1; overflow-y: auto; 
+            color: #2c2c2c; background-color: #f7f5f2; /* Default for classic */
+        }
+        /* Ensure classic style template uses Georgia throughout */
+        .expanded-style-content .elegantdesign-clone-content {
+            font-family: 'Georgia', serif;
+        }
+        .expanded-style-content .elegantdesign-clone-content * { 
+             font-family: 'Georgia', serif !important; 
         }
 
-        .style-box .explore-overlay {
+
+        /* Styles for the larger previews in the expanded view (Legacy Inc. Inspired & others) */
+        .expanded-style-content .elegantdesign-clone-content, 
+        .expanded-style-content .mini-website-preview-inner { /* .mini-website-preview-inner for colorful/techy */
+            margin: 0; border-radius: 0; box-shadow: none;
+            font-size: 1rem; 
+            height: 100%; display: flex; flex-direction: column;
+        }
+        .expanded-style-content .elegantdesign-clone-header { /* This is the header *within* the cloned content */
+            padding: 0.75rem 1.5rem; border-bottom: 1px solid #d1c8b2; background-color: #fdfcf9; 
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .expanded-style-content .elegantdesign-clone-header .logo-text { 
+            font-size: 1.8rem; font-weight: bold; color: #0a2342;
+        }
+        .expanded-style-content .elegantdesign-clone-header nav a { margin-left: 1.25rem; color: #0a2342; text-decoration: none; font-size: 0.95rem; font-weight:600; }
+        
+        .expanded-style-content .elegantdesign-clone-banner {
+            padding: 3.5rem 1.5rem; text-align: center; 
+            min-height: 280px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            position: relative; /* For video background */
+            overflow: hidden; /* To contain video */
+        }
+        .expanded-style-content .elegantdesign-clone-banner .video-background-container {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0,0,0,0.7);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.75rem;
-            font-weight: 700;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            border-radius: 0.75rem;
-            z-index: 10;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Behind banner content */
         }
-        .style-box:hover .explore-overlay {
-            opacity: 1;
-            pointer-events: auto;
+        .expanded-style-content .elegantdesign-clone-banner .video-background-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area, cropping if necessary */
         }
-
-        .style-description-area {
-            padding: 1.25rem 1.5rem;
-            text-align: left;
-            background-color: rgba(0,0,0,0.1);
+        .expanded-style-content .elegantdesign-clone-banner .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 35, 66, 0.6); /* Dark blueish tint, adjust opacity (0.6 for 60%) */
+            z-index: 2;
         }
-        .style-box h3 { /* Title below mini-website */
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .style-box .description-text { /* Description text below mini-website */
-            font-size: 0.875rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            flex-grow: 0;
-        }
-        .know-more-btn {
-            padding: 0.6rem 1.25rem;
-            border-radius: 0.375rem;
-            font-weight: 600;
-            font-size: 0.875rem;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            display: inline-block;
-            align-self: flex-start;
+        .expanded-style-content .elegantdesign-clone-banner .banner-content {
             position: relative;
-            z-index: 5;
+            z-index: 3; /* Above video and overlay */
+        }
+        .expanded-style-content .elegantdesign-clone-banner h1 {
+            font-size: 2.2rem; font-weight: 700; color: #FFFFFF; /* White text for contrast */ margin-bottom: 0.75rem; line-height: 1.3;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Subtle shadow for readability */
+        }
+        .expanded-style-content .elegantdesign-clone-banner .subtext-purpose {
+            font-size: 1.6rem; color: #f0e68c; /* Light gold for contrast */ font-weight: normal; margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+        .expanded-style-content .elegantdesign-clone-banner p { font-size: 1.05rem; color: #e0e0e0; /* Light gray for contrast */ max-width: 650px; margin: 0 auto; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); }
+        
+        .expanded-style-content .elegantdesign-clone-section { padding: 2.5rem 2rem; }
+        .expanded-style-content .elegantdesign-clone-section .super-heading {
+            font-size: 0.85rem; text-transform: uppercase; color: #b08d57; letter-spacing: 1px; margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+        .expanded-style-content .elegantdesign-clone-section h2.heading {
+            font-size: 1.9rem; font-weight: 700; color: #0a2342; margin-bottom: 1.25rem; 
+        }
+        .expanded-style-content .elegantdesign-clone-solutions-grid { display: flex; flex-wrap: wrap; gap: 1.75rem; justify-content: center; }
+        .expanded-style-content .elegantdesign-clone-solution-card {
+            background-color: #ffffff; border: 1px solid #dcd6c8; border-radius: 0.375rem; overflow: hidden;
+            width: calc(33.333% - 1.2rem); box-shadow: 0 3px 8px rgba(0,0,0,0.07);
+            display: flex; flex-direction: column;
+        }
+        .expanded-style-content .elegantdesign-clone-solution-card img { width: 100%; height: 160px; object-fit: cover; background-color: #eee; }
+        .expanded-style-content .elegantdesign-clone-solution-card .details { padding: 1.25rem; background-color: #fdfcf9; flex-grow: 1; }
+        .expanded-style-content .elegantdesign-clone-solution-card h5 { font-size: 1.15rem; font-weight: 600; color: #0a2342; margin-bottom: 0.6rem;}
+        .expanded-style-content .elegantdesign-clone-solution-card p { font-size: 0.875rem; color: #3e352a; margin-bottom: 1rem; line-height: 1.6; }
+        .expanded-style-content .elegantdesign-clone-solution-card .price { font-size: 0.8rem; color: #5c5245; }
+        .expanded-style-content .elegantdesign-clone-solution-card .price .million { font-weight: 600; color: #0a2342; }
+        .expanded-style-content .elegantdesign-clone-testimonial { background-color: #081c33; color: #e0d6b8; padding: 2.5rem; text-align: center; margin-top: 2.5rem; }
+        .expanded-style-content .elegantdesign-clone-testimonial .feedback { font-size: 1.15rem; font-style: italic; margin-bottom: 1.25rem; line-height: 1.7; max-width: 700px; margin-left:auto; margin-right:auto;}
+        .expanded-style-content .elegantdesign-clone-testimonial .name { font-weight: bold; font-size: 1.05rem;}
+        .expanded-style-content .elegantdesign-clone-testimonial .designation { font-size: 0.9rem; }
+        .expanded-style-content .elegantdesign-clone-footer {
+            padding: 1.75rem; text-align: center; background-color: #061220; color: #b0c4de;
+            font-size: 0.85rem; 
+        }
+        .expanded-style-content .elegantdesign-clone-footer a { color: #d1d5db; text-decoration: none; margin: 0 0.75rem; }
+        .expanded-style-content .elegantdesign-clone-footer a:hover { text-decoration: underline; color: #fff; }
+
+        @media (max-width: 992px) {
+            .expanded-style-content .elegantdesign-clone-solution-card { width: calc(50% - 1rem); }
+        }
+        @media (max-width: 640px) {
+            .expanded-style-content .elegantdesign-clone-solution-card { width: 100%; }
+            .expanded-style-content .elegantdesign-clone-banner h1 { font-size: 1.7rem; }
+            .expanded-style-content .elegantdesign-clone-banner .subtext-purpose { font-size: 1.3rem; }
+            .expanded-style-content .elegantdesign-clone-section h2.heading { font-size: 1.5rem; }
         }
 
-        /* --- Mini-Website Specific Styles --- */
-        .mini-website-preview-inner { /* Common inner wrapper for all mini-sites */
-            border-radius: 0.375rem;
-            margin: 0.75rem;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+        /* General expanded styles for colorful & techy */
+        .expanded-style-content.colorful-style .mini-website-preview-inner,
+        .expanded-style-content.techy-style .mini-website-preview-inner {
+            font-family: 'Inter', sans-serif; /* Default for these styles */
         }
+        .expanded-style-content.techy-style .mini-website-preview-inner,
+        .expanded-style-content.techy-style .mini-website-preview-inner * { 
+            font-family: 'Roboto Mono', monospace !important;
+        }
+
+        .expanded-style-content.colorful-style .mini-header,
+        .expanded-style-content.techy-style .mini-header { padding: 0.75rem 1.5rem !important; }
+        .expanded-style-content.colorful-style .mini-logo,
+        .expanded-style-content.techy-style .mini-logo { font-size: 1.25rem !important; }
+        .expanded-style-content.colorful-style .mini-nav a,
+        .expanded-style-content.techy-style .mini-nav a { font-size: 0.9rem !important; margin-left: 1rem !important;}
+        .expanded-style-content.colorful-style .mini-hero,
+        .expanded-style-content.techy-style .mini-hero { min-height: 220px !important; padding: 1.5rem !important; }
+        .expanded-style-content.colorful-style .mini-hero img { max-height: 90px !important; width:90px !important; }
+        .expanded-style-content.techy-style .mini-hero img { max-height: 100px !important; width:100px !important; }
+        .expanded-style-content.colorful-style .mini-hero h4,
+        .expanded-style-content.techy-style .mini-hero h4 { font-size: 1.5rem !important; margin-bottom: 0.5rem !important;}
+        .expanded-style-content.colorful-style .mini-hero p,
+        .expanded-style-content.techy-style .mini-hero p { font-size: 0.9rem !important; }
+        .expanded-style-content.colorful-style .mini-content-area,
+        .expanded-style-content.techy-style .mini-content-area { padding: 1.5rem !important; font-size: 0.9rem !important; line-height: 1.7 !important;}
+        .expanded-style-content.colorful-style .mini-content-area h5,
+        .expanded-style-content.techy-style .mini-content-area h5 { font-size: 1.1rem !important; margin-bottom: 0.75rem !important;}
+        .expanded-style-content.colorful-style .mini-content-area h6,
+        .expanded-style-content.techy-style .mini-content-area h6 { font-size: 1rem !important; font-weight: 600 !important; margin-top: 1rem !important; margin-bottom: 0.5rem !important;}
+        .expanded-style-content.colorful-style .feature-item { font-size: 0.8rem !important; padding: 0.4rem 0.8rem !important;}
+        .expanded-style-content.techy-style .data-point { font-size: 0.8rem !important; padding: 0.75rem !important;}
+        .expanded-style-content.colorful-style .mini-footer,
+        .expanded-style-content.techy-style .mini-footer { padding: 0.75rem !important; font-size: 0.8rem !important; }
+
 
         /* --- Styles for "Timeless Elegance & Trust" (.box-classic) --- */
         .box-classic { background-color: #0a2342; }
-        .box-classic .mini-website-preview-inner { background-color: #f7f5f2; font-family: 'Georgia', serif; } /* Cambria-like font */
-        .box-classic .mini-header {
-            background-color: #0a2342; padding: 0.4rem 0.6rem; border-bottom: 2px solid #daa520;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .box-classic .mini-logo { font-size: 0.75rem; font-weight: bold; color: #daa520; }
-        .box-classic .mini-nav a { color: #f0e68c; font-size: 0.6rem; margin-left: 0.4rem; text-decoration: none; }
-        .box-classic .mini-nav a:hover { text-decoration: underline; }
-        .box-classic .mini-hero {
-            text-align: center; background-color: #e0e0e0; position: relative;
-            display: flex; align-items: center; justify-content: center; overflow: hidden; min-height: 160px;
-        }
-        .box-classic .mini-hero img { width: 100%; height: 100%; max-height: 180px; object-fit: cover; display: block; }
-        .box-classic .mini-content-area { padding: 0.8rem; font-size: 0.68rem; color: #2c2c2c; flex-grow: 1; background-color: #f7f5f2; line-height: 1.5;}
-        .box-classic .mini-content-area h5 { font-size: 0.8rem; font-weight: 600; color: #0a2342; margin-bottom: 0.4rem; border-bottom: 1px solid #daa520; padding-bottom: 0.2rem;}
-        .box-classic .mini-content-area p { margin-bottom: 0.5rem; }
-        .box-classic .mini-content-area ul { list-style: disc; margin-left: 1rem; margin-bottom: 0.6rem; }
-        .box-classic .mini-content-area li { margin-bottom: 0.2rem; }
-        .box-classic .mini-footer { background-color: #0a2342; color: #f0e68c; font-size: 0.55rem; text-align: center; padding: 0.3rem; }
+        /* Small Preview Specifics */
+        .mini-website-preview .box-classic .mini-website-preview-inner { background-color: #f7f5f2; font-family: 'Georgia', serif; }
+        .mini-website-preview .box-classic .mini-header { background-color: #0a2342; border-bottom: 1px solid #daa520; } 
+        .mini-website-preview .box-classic .mini-logo { color: #daa520; }
+        .mini-website-preview .box-classic .mini-nav a { color: #f0e68c; text-decoration: none;}
+        .mini-website-preview .box-classic .mini-nav a:hover {text-decoration: underline;}
+        .mini-website-preview .box-classic .mini-hero { background-color: #e0e0e0; }
+        .mini-website-preview .box-classic .mini-hero img { object-fit: cover; }
+        .mini-website-preview .box-classic .mini-content-area { color: #2c2c2c; background-color: #f7f5f2;}
+        .mini-website-preview .box-classic .mini-content-area h5 { color: #0a2342; border-bottom: 1px solid #daa520;}
+        .mini-website-preview .box-classic .mini-footer { background-color: #0a2342; color: #f0e68c;}
         .box-classic .style-description-area { background-color: #081c33; }
         .box-classic .style-description-area h3, .box-classic .style-description-area .description-text { color: #f0e68c; }
-        .box-classic .know-more-btn { background-color: #daa520; color: #0a2342; }
-        .box-classic .know-more-btn:hover { background-color: #c89319; }
 
 
         /* --- Styles for "Vibrant Engagement & Clarity" (.box-colorful) --- */
         .box-colorful { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); }
-        .box-colorful .mini-website-preview-inner { background-color: #ffffff; font-family: 'Inter', sans-serif; }
-        .box-colorful .mini-header {
-            background-color: #ffffff; padding: 0.5rem 0.75rem; border-bottom: 2px solid #eeeeee;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .box-colorful .mini-logo { font-size: 0.8rem; font-weight: bold; color: #2575fc; }
-        .box-colorful .mini-nav a { color: #4a5568; font-size: 0.65rem; margin-left: 0.5rem; text-decoration: none; font-weight: 500; }
-        .box-colorful .mini-nav a:hover { color: #2575fc; }
-        .box-colorful .mini-hero {
-            padding: 1.5rem 1rem; text-align: center; background: linear-gradient(135deg, #f0f2f5 0%, #e0e7ff 100%);
-            min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-        .box-colorful .mini-hero img {
-            width: 70px; height: 70px; object-fit: contain; margin-bottom: 0.75rem;
-            background-color: rgba(255,255,255,0.5); border-radius: 0.375rem; padding: 0.25rem;
-        }
-        .box-colorful .mini-hero h4 { font-size: 1.1rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.25rem; }
-        .box-colorful .mini-hero p { font-size: 0.75rem; color: #374151; line-height: 1.4; max-width: 80%; }
-        .box-colorful .mini-content-area { padding: 1rem; font-size: 0.75rem; color: #333; flex-grow: 1; background-color: #ffffff; }
-        .box-colorful .mini-content-area h5 { font-size: 0.9rem; font-weight: 600; color: #6a11cb; margin-bottom: 0.5rem; }
-        .box-colorful .mini-content-area p { margin-bottom: 0.75rem; line-height: 1.6; }
-        .box-colorful .mini-content-area .feature-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-        .box-colorful .mini-content-area .feature-item { background-color: #f0f2f5; color: #2575fc; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.65rem; font-weight: 500;}
-        .box-colorful .mini-footer { background-color: #f0f2f5; color: #4a5568; font-size: 0.6rem; text-align: center; padding: 0.4rem; border-top: 1px solid #e5e7eb;}
+        .mini-website-preview .box-colorful .mini-website-preview-inner { background-color: #ffffff; font-family: 'Inter', sans-serif; }
+        .mini-website-preview .box-colorful .mini-header { background-color: #fff; border-bottom: 1px solid #eee;} 
+        .mini-website-preview .box-colorful .mini-logo { color: #2575fc; } 
+        .mini-website-preview .box-colorful .mini-nav a { color: #4a5568; font-weight:500;}
+        .mini-website-preview .box-colorful .mini-hero { background: linear-gradient(135deg, #f0f2f5 0%, #e0e7ff 100%);} 
+        .mini-website-preview .box-colorful .mini-hero h4 { color:#1e3a8a } 
+        .mini-website-preview .box-colorful .mini-hero p { color:#374151; }
+        .mini-website-preview .box-colorful .mini-content-area { color:#333; background-color:#fff;} 
+        .mini-website-preview .box-colorful .mini-content-area h5 { color:#6a11cb;}
+        .mini-website-preview .box-colorful .mini-footer { background-color:#f0f2f5; color:#4a5568; border-top:1px solid #e5e7eb;}
         .box-colorful .style-description-area { background-color: rgba(0,0,0,0.1); }
         .box-colorful .style-description-area h3, .box-colorful .style-description-area .description-text { color: #ffffff; }
-        .box-colorful .know-more-btn { background-color: #ffffff; color: #6a11cb; }
-        .box-colorful .know-more-btn:hover { background-color: #f0f0f0; }
 
 
         /* --- Styles for "Tech-y" (.box-techy) --- */
         .box-techy { background-color: #1a1a2e; border: 1px solid #00e5ff; }
-        .box-techy::before { /* Grid lines for the outer box */
-            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: linear-gradient(rgba(0, 229, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.07) 1px, transparent 1px);
-            background-size: 20px 20px; pointer-events: none; z-index: 0;
-        }
-        .box-techy > .style-box-content-wrapper > * { position: relative; z-index: 1; } /* Ensure content is above grid */
-        .box-techy .mini-website-preview-inner {
-            background-color: #0f0f22; /* Darker inner background */
-            font-family: 'Roboto Mono', monospace; /* Monospace font for tech feel */
-            color: #00e5ff; /* Cyan text */
-            border: 1px solid #007a8a; /* Darker cyan border for inner preview */
-        }
-        .box-techy .mini-header {
-            background-color: #14142a; padding: 0.4rem 0.6rem; border-bottom: 1px solid #00e5ff;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .box-techy .mini-logo { font-size: 0.8rem; font-weight: 500; color: #00e5ff; letter-spacing: 1px; }
-        .box-techy .mini-nav a { color: #00c4dd; font-size: 0.65rem; margin-left: 0.5rem; text-decoration: none; }
-        .box-techy .mini-nav a:hover { color: #ffffff; text-shadow: 0 0 5px #00e5ff; }
-        .box-techy .mini-hero {
-            padding: 1rem; text-align: center; background-color: #0a0a18; /* Even darker for hero */
-            min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-bottom: 1px dashed rgba(0, 229, 255, 0.3);
-        }
-        .box-techy .mini-hero img { /* Placeholder for tech graphic */
-            width: 80px; height: 80px; object-fit: contain; margin-bottom: 0.75rem;
-            /* filter: drop-shadow(0 0 8px #00e5ff); */ /* Optional glow effect */
-        }
-        .box-techy .mini-hero h4 { font-size: 1rem; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem; text-shadow: 0 0 8px #00e5ff; }
-        .box-techy .mini-hero p { font-size: 0.7rem; color: #a0e0ff; line-height: 1.4; }
-
-        .box-techy .mini-content-area { padding: 1rem; font-size: 0.7rem; color: #c0f0ff; flex-grow: 1; background-color: #0f0f22; }
-        .box-techy .mini-content-area h5 { font-size: 0.85rem; font-weight: 500; color: #00e5ff; margin-bottom: 0.6rem; border-bottom: 1px solid rgba(0, 229, 255, 0.5); padding-bottom: 0.3rem;}
-        .box-techy .mini-content-area p { margin-bottom: 0.75rem; line-height: 1.6; }
-        .box-techy .mini-content-area .data-point {
-            background-color: rgba(0, 229, 255, 0.1); border-left: 3px solid #00e5ff;
-            padding: 0.5rem; margin-bottom: 0.5rem; font-size: 0.65rem;
-        }
-        .box-techy .mini-content-area .data-point strong { color: #ffffff; }
-
-        .box-techy .mini-footer { background-color: #14142a; color: #00c4dd; font-size: 0.6rem; text-align: center; padding: 0.4rem; border-top: 1px solid #007a8a;}
+        .box-techy::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(rgba(0, 229, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.07) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none; z-index: 0; }
+        .box-techy > .style-box-content-wrapper > * { position: relative; z-index: 1; }
+        .mini-website-preview .box-techy .mini-website-preview-inner { background-color: #0f0f22; font-family: 'Roboto Mono', monospace; color: #00e5ff; border: 1px solid #007a8a; }
+        .mini-website-preview .box-techy .mini-header { background-color:#14142a; border-bottom:1px solid #00e5ff;} 
+        .mini-website-preview .box-techy .mini-logo { color:#00e5ff; letter-spacing:0.5px;} 
+        .mini-website-preview .box-techy .mini-nav a { color:#00c4dd;}
+        .mini-website-preview .box-techy .mini-hero { background-color:#0a0a18; border-bottom:1px dashed rgba(0, 229, 255, 0.3); } 
+        .mini-website-preview .box-techy .mini-hero h4 { color:#fff; text-shadow:0 0 3px #00e5ff;} 
+        .mini-website-preview .box-techy .mini-hero p { color:#a0e0ff;}
+        .mini-website-preview .box-techy .mini-content-area { color:#c0f0ff; background-color:#0f0f22;} 
+        .mini-website-preview .box-techy .mini-content-area h5 { color:#00e5ff; border-bottom:1px solid rgba(0, 229, 255, 0.5);}
+        .mini-website-preview .box-techy .mini-footer { background-color:#14142a; color:#00c4dd; border-top:1px solid #007a8a;}
         .box-techy .style-description-area { background-color: rgba(0, 229, 255, 0.05); }
         .box-techy .style-description-area h3 { color: #00e5ff; }
         .box-techy .style-description-area .description-text { color: #e0e0e0; }
-        .box-techy .know-more-btn { background-color: #00e5ff; color: #1a1a2e; }
-        .box-techy .know-more-btn:hover { background-color: #00c4dd; }
 
     </style>
 </head>
 <body>
 
-    <section class="hero-section">
+    <header class="main-navbar">
+        <div class="logo">WealthSite Co.</div>
+        <nav> <a href="#home">Home</a> <a href="#approach">Our Approach</a> <a href="#showcase">Showcase</a> <a href="#contact">Contact</a> </nav>
+        <div class="menu-toggle" id="mobile-menu-toggle">&#9776;</div>
+    </header>
+
+    <section class="hero-section" id="home">
         <div class="container mx-auto px-4">
-            <h1 class="hero-tagline">
-                Sculpting the Future of Digital Wealth.
-            </h1>
-            <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
-                We design and develop next-generation websites for wealth management firms, blending cutting-edge technology with intuitive user experiences to elevate your digital presence.
-            </p>
+            <h1 class="hero-tagline"> Sculpting the Future of Digital Wealth. </h1>
+            <p class="mt-6 text-lg md:text-xl max-w-2xl mx-auto text-gray-300"> We design and develop next-generation websites for wealth management firms, blending cutting-edge technology with intuitive user experiences to elevate your digital presence. </p>
         </div>
     </section>
 
-    <section class="style-showcase-section">
+    <section class="style-showcase-section" id="showcase">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4 style-showcase-heading">Explore Our Visionary Styles</h2>
-            <p class="text-center text-gray-600 mb-12 text-lg max-w-3xl mx-auto style-showcase-subheading">
-                Our design philosophies in continuous motion. Hover to pause and explore each concept.
-            </p>
+            <p class="text-center text-gray-600 mb-12 text-lg max-w-3xl mx-auto style-showcase-subheading"> Our design philosophies in continuous motion. Click a style to see a detailed preview. </p>
         </div>
         <div class="marquee-viewport">
             <div class="scrolling-wrapper">
-                <div class="style-box box-classic">
+                <div class="style-box box-classic" data-style="classic" data-title="Timeless Elegance & Trust - Legacy Wealth Inc.">
                     <div class="style-box-content-wrapper">
                         <div class="mini-website-preview">
                             <div class="mini-website-preview-inner">
-                                <div class="mini-header">
-                                    <span class="mini-logo">Legacy Wealth Inc.</span>
-                                    <nav class="mini-nav">
-                                        <a href="#">Home</a>
-                                        <a href="#">About Us</a>
-                                        <a href="#">Services</a>
-                                        <a href="#">Philosophy</a>
-                                        <a href="#">Contact</a>
-                                    </nav>
-                                </div>
-                                <div class="mini-hero">
-                                    <img src="istockphoto-1455167761-2048x2048.jpg" alt="Wealth management clients meeting">
-                                </div>
-                                <div class="mini-content-area">
-                                    <h5>Our Enduring Commitment</h5>
-                                    <p>For generations, we have been the steadfast guardians of our clients' prosperity, offering bespoke financial strategies rooted in deep market understanding and unwavering integrity. Our approach is both personal and profound.</p>
-                                    <ul>
-                                        <li>Personalized Portfolio Management</li>
-                                        <li>Transparent Fee Structures</li>
-                                        <li>Dedicated Advisory Teams</li>
-                                        <li>Comprehensive Estate Planning</li>
-                                    </ul>
-                                    <p>Building and preserving lasting legacies through prudent financial stewardship and exceptional client service is not just our business; it's our promise.</p>
-                                </div>
-                                <div class="mini-footer">
-                                    &copy; 2025 Legacy Wealth Inc. Trust. Tradition. Tomorrow.
-                                </div>
+                                <div class="mini-header"> <span class="mini-logo">Legacy Inc.</span> <nav class="mini-nav"> <a href="#">Home</a> <a href="#">About</a></nav> </div>
+                                <div class="mini-hero"> <img src="istockphoto-1455167761-2048x2048.jpg" alt="Clients"> </div>
+                                <div class="mini-content-area"> <h5>Commitment</h5> <p>Bespoke strategies...</p> </div>
+                                <div class="mini-footer"> &copy; Legacy </div>
                             </div>
                         </div>
-                        <div class="style-description-area">
-                            <h3>Timeless Elegance &amp; Trust</h3>
-                            <p class="description-text">A sophisticated, classic approach combining deep blues with luxurious gold accents. For firms emphasizing heritage and premium service.</p>
-                            <a href="#" class="know-more-btn">Know More</a>
-                        </div>
+                        <div class="style-description-area"> <h3>Timeless Elegance &amp; Trust</h3> <p class="description-text">Sophisticated, classic design...</p> </div>
                     </div>
-                    <div class="explore-overlay">Explore This Style</div>
                 </div>
-
-                <div class="style-box box-colorful">
-                    <div class="style-box-content-wrapper">
-                        <div class="mini-website-preview">
-                           <div class="mini-website-preview-inner">
-                                <div class="mini-header">
-                                    <span class="mini-logo">InnovateWealth</span>
-                                    <nav class="mini-nav">
-                                        <a href="#">Solutions</a>
-                                        <a href="#">Insights</a>
-                                        <a href="#">Platform</a>
-                                        <a href="#">Join Us</a>
-                                    </nav>
-                                </div>
-                                <div class="mini-hero">
-                                     <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt="InnovateWealth Abstract Graphic">
-                                    <h4>Future-Forward Financials</h4>
-                                    <p>Navigate your wealth journey with clarity and confidence.</p>
-                                </div>
-                                <div class="mini-content-area">
-                                    <h5>Experience the Difference:</h5>
-                                    <p>We empower you with intuitive digital tools and transparent insights, making complex financial decisions simpler and more engaging. Our platform is designed for your life, your goals.</p>
-                                    <div class="feature-list">
-                                        <span class="feature-item">Interactive Dashboards</span>
-                                        <span class="feature-item">Goal Tracking</span>
-                                        <span class="feature-item">24/7 Access</span>
-                                        <span class="feature-item">Secure Messaging</span>
-                                    </div>
-                                </div>
-                                <div class="mini-footer">
-                                    InnovateWealth &copy; 2025. Your Vision, Amplified.
-                                </div>
-                           </div>
-                        </div>
-                        <div class="style-description-area">
-                            <h3>Vibrant Engagement &amp; Clarity</h3>
-                            <p class="description-text">Dynamic and approachable, using a modern, colorful palette for an inviting user experience. Ideal for forward-thinking firms.</p>
-                            <a href="#" class="know-more-btn">Know More</a>
-                        </div>
+                <div class="style-box box-colorful" data-style="colorful" data-title="Vibrant Engagement & Clarity - InnovateWealth">
+                    <div class="style-box-content-wrapper"> 
+                        <div class="mini-website-preview"> 
+                            <div class="mini-website-preview-inner"> 
+                                <div class="mini-header"> <span class="mini-logo">Innovate</span> <nav class="mini-nav"> <a href="#">Solutions</a> <a href="#">Platform</a></nav> </div>
+                                <div class="mini-hero"> <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt="IW"> <h4>Future-Forward</h4> </div>
+                                <div class="mini-content-area"> <h5>Experience</h5> <p>Intuitive tools...</p> </div>
+                                <div class="mini-footer"> Innovate &copy; </div>
+                            </div> 
+                        </div> 
+                        <div class="style-description-area"> <h3>Vibrant Engagement &amp; Clarity</h3> <p class="description-text">Dynamic, approachable design...</p> </div> 
                     </div>
-                    <div class="explore-overlay">Explore This Style</div>
                 </div>
-
-                <div class="style-box box-techy">
-                     <div class="style-box-content-wrapper">
-                        <div class="mini-website-preview">
-                            <div class="mini-website-preview-inner">
-                                <div class="mini-header">
-                                    <span class="mini-logo">QuantumLeap AI</span>
-                                    <nav class="mini-nav">
-                                        <a href="#">Alpha</a>
-                                        <a href="#">Sigma</a>
-                                        <a href="#">Omega</a>
-                                        <a href="#">API</a>
-                                    </nav>
-                                </div>
-                                <div class="mini-hero">
-                                     <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL-AI&font=robomono" alt="QuantumLeap AI Abstract Graphic">
-                                    <h4>AI-Driven Wealth Intelligence</h4>
-                                    <p>Unlocking alpha with predictive analytics.</p>
-                                </div>
-                                <div class="mini-content-area">
-                                    <h5>System Online: Portfolio Optimization</h5>
-                                    <p>Real-time data ingestion. Predictive models recalibrating... Market sentiment: Neutral-Positive. Volatility index: Low.</p>
-                                    <div class="data-point"><strong>Asset Allocation:</strong> Dynamic shift towards growth.</div>
-                                    <div class="data-point"><strong>Risk Matrix:</strong> All parameters within defined thresholds.</div>
-                                </div>
-                                <div class="mini-footer">
-                                    QuantumLeap AI // Secure Connection Established
-                                </div>
-                            </div>
-                        </div>
-                        <div class="style-description-area">
-                            <h3>AI-Powered Future Finance</h3>
-                            <p class="description-text">Cutting-edge and innovative, with sleek dark themes and data-driven visuals. For firms leveraging AI to redefine wealth management.</p>
-                            <a href="#" class="know-more-btn">Know More</a>
-                        </div>
+                <div class="style-box box-techy" data-style="techy" data-title="AI-Powered Future Finance - QuantumLeap AI">
+                    <div class="style-box-content-wrapper"> 
+                        <div class="mini-website-preview"> 
+                            <div class="mini-website-preview-inner"> 
+                                <div class="mini-header"> <span class="mini-logo">QL AI</span> <nav class="mini-nav"> <a href="#">Alpha</a> <a href="#">API</a></nav> </div>
+                                <div class="mini-hero"> <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL&font=robomono" alt="QL-AI"> <h4>AI Intel</h4></div>
+                                <div class="mini-content-area"> <h5>System</h5> <p>Real-time...</p> </div>
+                                <div class="mini-footer"> QL // Secure </div>
+                            </div> 
+                        </div> 
+                        <div class="style-description-area"> <h3>AI-Powered Future Finance</h3> <p class="description-text">Cutting-edge, innovative design...</p> </div> 
                     </div>
-                    <div class="explore-overlay">Explore This Style</div>
                 </div>
-
-                <div class="style-box box-classic" aria-hidden="true">
-                    <div class="style-box-content-wrapper">
-                        <div class="mini-website-preview">
-                            <div class="mini-website-preview-inner">
-                                <div class="mini-header">
-                                    <span class="mini-logo">Legacy Wealth Inc.</span>
-                                    <nav class="mini-nav">
-                                        <a href="#">Home</a>
-                                        <a href="#">About Us</a>
-                                        <a href="#">Services</a>
-                                        <a href="#">Philosophy</a>
-                                        <a href="#">Contact</a>
-                                    </nav>
-                                </div>
-                                <div class="mini-hero">
-                                    <img src="istockphoto-1455167761-2048x2048.jpg" alt="">
-                                </div>
-                                <div class="mini-content-area">
-                                    <h5>Our Enduring Commitment</h5>
-                                    <p>For generations, we have been the steadfast guardians of our clients' prosperity, offering bespoke financial strategies rooted in deep market understanding and unwavering integrity. Our approach is both personal and profound.</p>
-                                    <ul>
-                                        <li>Personalized Portfolio Management</li>
-                                        <li>Transparent Fee Structures</li>
-                                        <li>Dedicated Advisory Teams</li>
-                                        <li>Comprehensive Estate Planning</li>
-                                    </ul>
-                                    <p>Building and preserving lasting legacies through prudent financial stewardship and exceptional client service is not just our business; it's our promise.</p>
-                                </div>
-                                <div class="mini-footer">
-                                     &copy; 2025 Legacy Wealth Inc. Trust. Tradition. Tomorrow.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="style-description-area">
-                            <h3>Timeless Elegance &amp; Trust</h3>
-                            <p class="description-text">A sophisticated, classic approach combining deep blues with luxurious gold accents. For firms emphasizing heritage and premium service.</p>
-                            <a href="#" class="know-more-btn">Know More</a>
-                        </div>
-                    </div>
-                    <div class="explore-overlay">Explore This Style</div>
-                </div>
-
-                <div class="style-box box-colorful" aria-hidden="true">
-                    <div class="style-box-content-wrapper">
-                        <div class="mini-website-preview">
-                           <div class="mini-website-preview-inner">
-                                <div class="mini-header">
-                                    <span class="mini-logo">InnovateWealth</span>
-                                    <nav class="mini-nav">
-                                        <a href="#">Solutions</a>
-                                        <a href="#">Insights</a>
-                                        <a href="#">Platform</a>
-                                        <a href="#">Join Us</a>
-                                    </nav>
-                                </div>
-                                <div class="mini-hero">
-                                     <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt="">
-                                    <h4>Future-Forward Financials</h4>
-                                    <p>Navigate your wealth journey with clarity and confidence.</p>
-                                </div>
-                                <div class="mini-content-area">
-                                    <h5>Experience the Difference:</h5>
-                                    <p>We empower you with intuitive digital tools and transparent insights, making complex financial decisions simpler and more engaging. Our platform is designed for your life, your goals.</p>
-                                     <div class="feature-list">
-                                        <span class="feature-item">Interactive Dashboards</span>
-                                        <span class="feature-item">Goal Tracking</span>
-                                        <span class="feature-item">24/7 Access</span>
-                                        <span class="feature-item">Secure Messaging</span>
-                                    </div>
-                                </div>
-                                <div class="mini-footer">
-                                    InnovateWealth &copy; 2025. Your Vision, Amplified.
-                                </div>
-                           </div>
-                        </div>
-                        <div class="style-description-area">
-                            <h3>Vibrant Engagement &amp; Clarity</h3>
-                            <p class="description-text">Dynamic and approachable, using a modern, colorful palette for an inviting user experience. Ideal for forward-thinking firms.</p>
-                            <a href="#" class="know-more-btn">Know More</a>
-                        </div>
-                    </div>
-                    <div class="explore-overlay">Explore This Style</div>
-                </div>
-
-                <div class="style-box box-techy" aria-hidden="true">
-                     <div class="style-box-content-wrapper">
-                        <div class="mini-website-preview">
-                            <div class="mini-website-preview-inner">
-                                 <div class="mini-header">
-                                    <span class="mini-logo">QuantumLeap AI</span>
-                                    <nav class="mini-nav">
-                                        <a href="#">Alpha</a>
-                                        <a href="#">Sigma</a>
-                                        <a href="#">Omega</a>
-                                        <a href="#">API</a>
-                                    </nav>
-                                </div>
-                                <div class="mini-hero">
-                                     <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL-AI&font=robomono" alt="">
-                                    <h4>AI-Driven Wealth Intelligence</h4>
-                                    <p>Unlocking alpha with predictive analytics.</p>
-                                </div>
-                                <div class="mini-content-area">
-                                    <h5>System Online: Portfolio Optimization</h5>
-                                    <p>Real-time data ingestion. Predictive models recalibrating... Market sentiment: Neutral-Positive. Volatility index: Low.</p>
-                                    <div class="data-point"><strong>Asset Allocation:</strong> Dynamic shift towards growth.</div>
-                                    <div class="data-point"><strong>Risk Matrix:</strong> All parameters within defined thresholds.</div>
-                                </div>
-                                <div class="mini-footer">
-                                     QuantumLeap AI // Secure Connection Established
-                                </div>
-                            </div>
-                        </div>
-                        <div class="style-description-area">
-                            <h3>AI-Powered Future Finance</h3>
-                            <p class="description-text">Cutting-edge and innovative, with sleek dark themes and data-driven visuals. For firms leveraging AI to redefine wealth management.</p>
-                            <a href="#" class="know-more-btn">Know More</a>
-                        </div>
-                    </div>
-                    <div class="explore-overlay">Explore This Style</div>
-                </div>
+                <div class="style-box box-classic" aria-hidden="true" data-style="classic" data-title="Timeless Elegance & Trust - Legacy Wealth Inc."> <div class="style-box-content-wrapper"> <div class="mini-website-preview"> <div class="mini-website-preview-inner"> <div class="mini-header"> <span class="mini-logo">Legacy Inc.</span> <nav class="mini-nav"> <a href="#">Home</a> <a href="#">About</a></nav> </div> <div class="mini-hero"> <img src="istockphoto-1455167761-2048x2048.jpg" alt=""> </div> <div class="mini-content-area"> <h5>Commitment</h5> <p>Bespoke strategies...</p> </div> <div class="mini-footer"> &copy; Legacy </div> </div> </div> <div class="style-description-area"> <h3>Timeless Elegance &amp; Trust</h3> <p class="description-text">Sophisticated, classic design...</p> </div> </div> </div>
+                <div class="style-box box-colorful" aria-hidden="true" data-style="colorful" data-title="Vibrant Engagement & Clarity - InnovateWealth"> <div class="style-box-content-wrapper"> <div class="mini-website-preview"> <div class="mini-website-preview-inner"> <div class="mini-header"> <span class="mini-logo">Innovate</span> <nav class="mini-nav"> <a href="#">Solutions</a> <a href="#">Platform</a></nav> </div> <div class="mini-hero"> <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt=""> <h4>Future-Forward</h4></div> <div class="mini-content-area"> <h5>Experience</h5> <p>Intuitive tools...</p> </div> <div class="mini-footer"> Innovate &copy; </div> </div> </div> <div class="style-description-area"> <h3>Vibrant Engagement &amp; Clarity</h3> <p class="description-text">Dynamic, approachable design...</p> </div> </div> </div>
+                <div class="style-box box-techy" aria-hidden="true" data-style="techy" data-title="AI-Powered Future Finance - QuantumLeap AI"> <div class="style-box-content-wrapper"> <div class="mini-website-preview"> <div class="mini-website-preview-inner"> <div class="mini-header"> <span class="mini-logo">QL AI</span> <nav class="mini-nav"> <a href="#">Alpha</a> <a href="#">API</a></nav> </div> <div class="mini-hero"> <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL&font=robomono" alt=""> <h4>AI Intel</h4></div> <div class="mini-content-area"> <h5>System</h5> <p>Real-time...</p> </div> <div class="mini-footer"> QL // Secure </div> </div> </div> <div class="style-description-area"> <h3>AI-Powered Future Finance</h3> <p class="description-text">Cutting-edge, innovative design...</p> </div> </div> </div>
             </div>
         </div>
     </section>
 
-    <div class="text-center py-16">
-        <p class="text-gray-500">More sections to come...</p>
+    <div class="expanded-style-view-overlay" id="expanded-view-overlay">
+        <div class="expanded-style-view-container" id="expanded-view-container">
+            <div class="expanded-style-header">
+                <h2 id="expanded-view-title">Style Preview</h2>
+                <button class="expanded-style-close-btn" id="expanded-view-close-btn">&times;</button>
+            </div>
+            <div class="expanded-style-content" id="expanded-view-content">
+                <div class="elegantdesign-clone-content" style="display: none;" data-style-template="classic">
+                    <header class="elegantdesign-clone-header">
+                        <div class="logo-text">Legacy Wealth Inc.</div>
+                        <nav>
+                            <a href="#">Our Ethos</a>
+                            <a href="#">Client Services</a>
+                            <a href="#">Market Insights</a>
+                            <a href="#">Join Our Firm</a>
+                            <a href="#">Connect</a>
+                        </nav>
+                    </header>
+                    <section class="elegantdesign-clone-banner">
+                        <div class="video-background-container">
+                            <video autoplay loop muted playsinline poster="https://placehold.co/1200x600/0A2342/DAA520?text=Legacy+Banner+Poster&font=georgia">
+                                <source src="https://res.cloudinary.com/djoz6eft7/video/upload/v1748201120/20250525_2342_Financial_Planning_Discussion_storyboard_01jw4aakwye5xawwwy0rcd0nr2_ln9ufz.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+                        <div class="banner-content">
+                            <h1>Aligning Your Aspirations <br> with Your Financial <span class="subtext-purpose">Destiny</span></h1>
+                            <p>Partner with a distinguished advisory firm, renowned for its bespoke approach to wealth preservation and strategic growth for discerning families and individuals.</p>
+                        </div>
+                    </section>
+                    <section class="elegantdesign-clone-section">
+                        <div class="super-heading">Our Offerings</div>
+                        <h2 class="heading">Crafting Your Financial Masterpiece</h2>
+                        <p class="mb-6 text-center max-w-2xl mx-auto">True wealth counsel extends beyond mere portfolio construction. Drawing from decades of experience serving esteemed clientele, we champion a comprehensive, global perspective tailored to your unique financial landscape and long-term objectives.</p>
+                        <div class="elegantdesign-clone-solutions-grid">
+                            <div class="elegantdesign-clone-solution-card">
+                                <img src="YOUR_IMAGE_URL_HERE_1.jpg" alt="Private Client Services representation">
+                                <div class="details">
+                                    <h5>Private Client Services</h5>
+                                    <p>Empowering your financial journey with personalized strategies and dedicated advisory for individuals and families.</p>
+                                    <div class="price"><span>Typical Asset Base</span><div class="million">₹ 5 Cr to ₹ 100 Cr</div></div>
+                                </div>
+                            </div>
+                            <div class="elegantdesign-clone-solution-card">
+                                <img src="YOUR_IMAGE_URL_HERE_2.jpg" alt="Family Enterprise Advisory representation">
+                                <div class="details">
+                                    <h5>Family Enterprise Advisory</h5>
+                                    <p>Preserving and enhancing multi-generational wealth through holistic advisory and governance structures.</p>
+                                    <div class="price"><span>Typical Asset Base</span><div class="million">₹ 100 Cr & Above</div></div>
+                                </div>
+                            </div>
+                            <div class="elegantdesign-clone-solution-card">
+                                <img src="YOUR_IMAGE_URL_HERE_3.jpg" alt="Investment Banking representation">
+                                <div class="details">
+                                    <h5>Investment Banking</h5>
+                                    <p>Strategic capital solutions and advisory for businesses navigating growth, M&A, and market entry.</p>
+                                    <div class="price"><span>Focus Areas</span><div class="million">Pre-IPO, Private Equity & Private Credit</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="elegantdesign-clone-section">
+                        <div class="super-heading">Knowledge Center</div>
+                        <h2 class="heading">Access to Curated Perspectives</h2>
+                        <p class="mb-4 text-center max-w-2xl mx-auto">Gain valuable insights from our seasoned experts, navigating the forefront of financial innovation and market dynamics.</p>
+                        <div class="text-center"> <a href="#" class="inline-block font-semibold py-2 px-4 rounded transition-colors" style="background-color:#daa520; color:#0a2342;">Explore Our Insights</a> </div>
+                    </section>
+                    <section class="elegantdesign-clone-testimonial">
+                        <p class="feedback">"Legacy Wealth Inc. has been instrumental in structuring our family's financial future with exceptional professionalism and a truly personalized touch. Their insights are invaluable, and their integrity is unmatched."</p>
+                        <div class="name">A. K. Sharma</div>
+                        <div class="designation">Chairman, Sharma Group Enterprises</div>
+                    </section>
+                    <footer class="elegantdesign-clone-footer">
+                        <p>© <span class="current_year"></span> Legacy Wealth Inc. All Rights Reserved.</p>
+                        <p><a href="#">Privacy Statement</a> | <a href="#">Terms of Use</a> | <a href="#">Regulatory Disclosures</a></p>
+                    </footer>
+                </div>
+
+                <div class="mini-website-preview-inner colorful-style" style="display: none;" data-style-template="colorful">
+                    <div class="mini-header"> <span class="mini-logo">InnovateWealth</span> <nav class="mini-nav"> <a href="#">Solutions</a> <a href="#">Insights Hub</a> <a href="#">Platform</a> <a href="#">Community</a> <a href="#">Support</a> <a href="#">Log In</a> </nav> </div>
+                    <div class="mini-hero"> <img src="https://placehold.co/120x120/2575FC/FFFFFF?text=IW+Dynamic&font=inter" alt="InnovateWealth"> <h4>Future-Forward Financials, Simplified.</h4> <p>Navigate your wealth journey with unparalleled clarity, intuitive tools, and a vibrant community...</p> </div>
+                    <div class="mini-content-area"> <h5>Experience the InnovateWealth Difference:</h5> <p>We empower you with cutting-edge digital tools and transparent insights...</p> <h6>Key Features:</h6> <ul class="feature-list" style="list-style: none; padding-left:0;"> <li class="feature-item" style="background-color: #e0e7ff; color: #1e3a8a;">Interactive Dashboards</li> <li class="feature-item" style="background-color: #e0e7ff; color: #1e3a8a;">Goal Tracking</li> <li class="feature-item" style="background-color: #e0e7ff; color: #1e3a8a;">24/7 Access</li> <li class="feature-item" style="background-color: #e0e7ff; color: #1e3a8a;">Secure Messaging</li> <li class="feature-item" style="background-color: #e0e7ff; color: #1e3a8a;">Portfolio Rebalancing</li> <li class="feature-item" style="background-color: #e0e7ff; color: #1e3a8a;">Resources & Webinars</li> </ul> <p style="margin-top: 1rem;"><strong>Client Success:</strong> "InnovateWealth made understanding my investments so much easier!" - Alex P.</p> </div>
+                    <div class="mini-footer"> InnovateWealth &copy; 2025. Your Vision, Amplified. | Privacy | Terms </div>
+                </div>
+
+                <div class="mini-website-preview-inner techy-style" style="display: none;" data-style-template="techy">
+                    <div class="mini-header"> <span class="mini-logo">QuantumLeap AI Wealth</span> <nav class="mini-nav"> <a href="#">[Alpha]</a> <a href="#">[Sigma]</a> <a href="#">[Omega]</a> <a href="#">[API]</a> <a href="#">[Status]</a> </nav> </div>
+                    <div class="mini-hero"> <img src="https://placehold.co/120x120/0A0A18/00E5FF?text=QL|AI&font=robomono&bold" alt="QL-AI"> <h4>AI-Driven Wealth Intelligence v3.1</h4> <p>Unlocking alpha with predictive analytics, neural networks, and high-frequency data modeling...</p> </div>
+                    <div class="mini-content-area"> <h5>[System_Interface]: Active Portfolio Module</h5> <p>// Real-time data stream active...<br>// Predictive models recalibrating (Confidence: 98.7%)...<br>// Market sentiment: VIX at 14.2 (Stable)...</p> <h6>[Directives]:</h6> <div class="data-point"><strong>Allocation:</strong> Dynamic shift to global tech...</div> <div class="data-point"><strong>Risk Matrix:</strong> Parameters within thresholds...</div> <div class="data-point"><strong>AlphaGen Signal:</strong> BUY on 3 micro-caps...</div> <h6>[Security]:</h6> <p>// Quantum-resistant encryption active.<br>// MFA verified.<br>// HDN threat monitoring.</p> </div>
+                    <div class="mini-footer"> QuantumLeap AI // Secure // Node: 7A3F-00XQ // Timestamp: <span id="techy-timestamp"></span> </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="text-center py-16"> <p class="text-gray-500">More sections to come...</p> </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const styleBoxes = document.querySelectorAll('.style-box');
+            const expandedViewOverlay = document.getElementById('expanded-view-overlay');
+            const expandedViewContent = document.getElementById('expanded-view-content');
+            const expandedViewTitle = document.getElementById('expanded-view-title');
+            const closeBtn = document.getElementById('expanded-view-close-btn');
+
+            const styleTemplates = {};
+            document.querySelectorAll('[data-style-template]').forEach(template => {
+                styleTemplates[template.dataset.styleTemplate] = template.cloneNode(true);
+            });
+            document.getElementById('expanded-view-content').innerHTML = '';
+
+            styleBoxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    const styleType = box.dataset.style;
+                    const styleTitle = box.dataset.title;
+                    expandedViewContent.innerHTML = '';
+                    if (styleTemplates[styleType]) {
+                        const templateClone = styleTemplates[styleType].cloneNode(true);
+                        templateClone.style.display = 'flex';
+
+                        expandedViewContent.appendChild(templateClone);
+
+                        expandedViewContent.className = 'expanded-style-content';
+
+                        if (styleType === 'techy') {
+                            const timestampEl = templateClone.querySelector('#techy-timestamp');
+                            if(timestampEl) timestampEl.textContent = new Date().toISOString().slice(0,19).replace('T',' ');
+                        }
+                        if (styleType === 'classic') {
+                             const yearEl = templateClone.querySelector('.current_year');
+                             if(yearEl) yearEl.textContent = new Date().getFullYear();
+                        }
+                        expandedViewTitle.textContent = styleTitle || 'Style Preview';
+                        expandedViewOverlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        console.warn('Template not found for style:', styleType);
+                        expandedViewContent.innerHTML = `<p class="p-8 text-center">Content for '${styleTitle}' coming soon!</p>`;
+                        expandedViewTitle.textContent = styleTitle || 'Style Preview';
+                        expandedViewOverlay.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    expandedViewOverlay.style.display = 'none';
+                    expandedViewContent.innerHTML = '';
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (expandedViewOverlay) {
+                expandedViewOverlay.addEventListener('click', (event) => {
+                    if (event.target === expandedViewOverlay) {
+                        expandedViewOverlay.style.display = 'none';
+                        expandedViewContent.innerHTML = '';
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-navbar nav');
+            if (mobileMenuToggle && mainNav) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
