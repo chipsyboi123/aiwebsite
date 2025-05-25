@@ -143,7 +143,20 @@
             flex-direction: column;
             overflow: hidden;
             height: 240px; 
+            background-color: #e0e0e0; /* Fallback bg for image area */
         }
+        /* Styling for the new image in classic box's small preview */
+        .box-classic .mini-website-preview .marquee-image-fill {
+            width: calc(100% - 1rem); 
+            height: calc(100% - 1rem);
+            object-fit: cover;
+            margin: 0.5rem;
+            border-radius: 0.375rem;
+            display: block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Styling for the inner content of small previews (colorful & techy) */
         .mini-website-preview .mini-website-preview-inner { 
             border-radius: 0.375rem; 
             margin: 0.5rem; 
@@ -363,16 +376,16 @@
         /* --- Styles for "Timeless Elegance & Trust" (.box-classic) --- */
         .box-classic { background-color: #0a2342; }
         /* Small Preview Specifics */
-        .mini-website-preview .box-classic .mini-website-preview-inner { background-color: #f7f5f2; font-family: 'Georgia', serif; }
-        .mini-website-preview .box-classic .mini-header { background-color: #0a2342; border-bottom: 1px solid #daa520; } 
-        .mini-website-preview .box-classic .mini-logo { color: #daa520; }
-        .mini-website-preview .box-classic .mini-nav a { color: #f0e68c; text-decoration: none;}
-        .mini-website-preview .box-classic .mini-nav a:hover {text-decoration: underline;}
-        .mini-website-preview .box-classic .mini-hero { background-color: #e0e0e0; }
-        .mini-website-preview .box-classic .mini-hero img { object-fit: cover; }
-        .mini-website-preview .box-classic .mini-content-area { color: #2c2c2c; background-color: #f7f5f2;}
-        .mini-website-preview .box-classic .mini-content-area h5 { color: #0a2342; border-bottom: 1px solid #daa520;}
-        .mini-website-preview .box-classic .mini-footer { background-color: #0a2342; color: #f0e68c;}
+        /* .mini-website-preview .box-classic .mini-website-preview-inner { background-color: #f7f5f2; font-family: 'Georgia', serif; } */
+        /* .mini-website-preview .box-classic .mini-header { background-color: #0a2342; border-bottom: 1px solid #daa520; }  */
+        /* .mini-website-preview .box-classic .mini-logo { color: #daa520; } */
+        /* .mini-website-preview .box-classic .mini-nav a { color: #f0e68c; text-decoration: none;} */
+        /* .mini-website-preview .box-classic .mini-nav a:hover {text-decoration: underline;} */
+        /* .mini-website-preview .box-classic .mini-hero { background-color: #e0e0e0; } */
+        /* .mini-website-preview .box-classic .mini-hero img { object-fit: cover; } */
+        /* .mini-website-preview .box-classic .mini-content-area { color: #2c2c2c; background-color: #f7f5f2;} */
+        /* .mini-website-preview .box-classic .mini-content-area h5 { color: #0a2342; border-bottom: 1px solid #daa520;} */
+        /* .mini-website-preview .box-classic .mini-footer { background-color: #0a2342; color: #f0e68c;} */
         .box-classic .style-description-area { background-color: #081c33; }
         .box-classic .style-description-area h3, .box-classic .style-description-area .description-text { color: #f0e68c; }
 
@@ -438,12 +451,7 @@
                 <div class="style-box box-classic" data-style="classic" data-title="Timeless Elegance & Trust - Legacy Wealth Inc.">
                     <div class="style-box-content-wrapper">
                         <div class="mini-website-preview">
-                            <div class="mini-website-preview-inner">
-                                <div class="mini-header"> <span class="mini-logo">Legacy Inc.</span> <nav class="mini-nav"> <a href="#">Home</a> <a href="#">About</a></nav> </div>
-                                <div class="mini-hero"> <img src="https://res.cloudinary.com/djoz6eft7/image/upload/v1748199331/ChatGPT_Image_May_26_2025_12_09_13_AM_tmruzl.png" alt="Clients"> </div>
-                                <div class="mini-content-area"> <h5>Commitment</h5> <p>Bespoke strategies...</p> </div>
-                                <div class="mini-footer"> &copy; Legacy </div>
-                            </div>
+                           <img src="https://res.cloudinary.com/djoz6eft7/image/upload/v1748201976/Screenshot_2025-05-26_010830_h70lxc.png" alt="Timeless Elegance Preview" class="marquee-image-fill">
                         </div>
                         <div class="style-description-area"> <h3>Timeless Elegance &amp; Trust</h3> <p class="description-text">Sophisticated, classic design...</p> </div>
                     </div>
@@ -453,7 +461,7 @@
                         <div class="mini-website-preview"> 
                             <div class="mini-website-preview-inner"> 
                                 <div class="mini-header"> <span class="mini-logo">Innovate</span> <nav class="mini-nav"> <a href="#">Solutions</a> <a href="#">Platform</a></nav> </div>
-                                <div class="mini-hero"> <img src="https://res.cloudinary.com/djoz6eft7/image/upload/v1748199639/ChatGPT_Image_May_26_2025_12_29_50_AM_z6dmnm.png" alt="IW"> <h4>Future-Forward</h4> </div>
+                                <div class="mini-hero"> <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt="IW"> <h4>Future-Forward</h4> </div>
                                 <div class="mini-content-area"> <h5>Experience</h5> <p>Intuitive tools...</p> </div>
                                 <div class="mini-footer"> Innovate &copy; </div>
                             </div> 
@@ -466,7 +474,7 @@
                         <div class="mini-website-preview"> 
                             <div class="mini-website-preview-inner"> 
                                 <div class="mini-header"> <span class="mini-logo">QL AI</span> <nav class="mini-nav"> <a href="#">Alpha</a> <a href="#">API</a></nav> </div>
-                                <div class="mini-hero"> <img src="https://res.cloudinary.com/djoz6eft7/image/upload/v1748200350/ChatGPT_Image_May_26_2025_12_41_37_AM_ecrbos.png" alt="QL-AI"> <h4>AI Intel</h4></div>
+                                <div class="mini-hero"> <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL&font=robomono" alt="QL-AI"> <h4>AI Intel</h4></div>
                                 <div class="mini-content-area"> <h5>System</h5> <p>Real-time...</p> </div>
                                 <div class="mini-footer"> QL // Secure </div>
                             </div> 
@@ -474,7 +482,14 @@
                         <div class="style-description-area"> <h3>AI-Powered Future Finance</h3> <p class="description-text">Cutting-edge, innovative design...</p> </div> 
                     </div>
                 </div>
-                <div class="style-box box-classic" aria-hidden="true" data-style="classic" data-title="Timeless Elegance & Trust - Legacy Wealth Inc."> <div class="style-box-content-wrapper"> <div class="mini-website-preview"> <div class="mini-website-preview-inner"> <div class="mini-header"> <span class="mini-logo">Legacy Inc.</span> <nav class="mini-nav"> <a href="#">Home</a> <a href="#">About</a></nav> </div> <div class="mini-hero"> <img src="istockphoto-1455167761-2048x2048.jpg" alt=""> </div> <div class="mini-content-area"> <h5>Commitment</h5> <p>Bespoke strategies...</p> </div> <div class="mini-footer"> &copy; Legacy </div> </div> </div> <div class="style-description-area"> <h3>Timeless Elegance &amp; Trust</h3> <p class="description-text">Sophisticated, classic design...</p> </div> </div> </div>
+                <div class="style-box box-classic" aria-hidden="true" data-style="classic" data-title="Timeless Elegance & Trust - Legacy Wealth Inc."> 
+                    <div class="style-box-content-wrapper"> 
+                        <div class="mini-website-preview"> 
+                            <img src="https://res.cloudinary.com/djoz6eft7/image/upload/v1748201976/Screenshot_2025-05-26_010830_h70lxc.png" alt="Timeless Elegance Preview" class="marquee-image-fill">
+                        </div> 
+                        <div class="style-description-area"> <h3>Timeless Elegance &amp; Trust</h3> <p class="description-text">Sophisticated, classic design...</p> </div> 
+                    </div> 
+                </div>
                 <div class="style-box box-colorful" aria-hidden="true" data-style="colorful" data-title="Vibrant Engagement & Clarity - InnovateWealth"> <div class="style-box-content-wrapper"> <div class="mini-website-preview"> <div class="mini-website-preview-inner"> <div class="mini-header"> <span class="mini-logo">Innovate</span> <nav class="mini-nav"> <a href="#">Solutions</a> <a href="#">Platform</a></nav> </div> <div class="mini-hero"> <img src="https://placehold.co/80x80/2575FC/FFFFFF?text=IW&font=inter" alt=""> <h4>Future-Forward</h4></div> <div class="mini-content-area"> <h5>Experience</h5> <p>Intuitive tools...</p> </div> <div class="mini-footer"> Innovate &copy; </div> </div> </div> <div class="style-description-area"> <h3>Vibrant Engagement &amp; Clarity</h3> <p class="description-text">Dynamic, approachable design...</p> </div> </div> </div>
                 <div class="style-box box-techy" aria-hidden="true" data-style="techy" data-title="AI-Powered Future Finance - QuantumLeap AI"> <div class="style-box-content-wrapper"> <div class="mini-website-preview"> <div class="mini-website-preview-inner"> <div class="mini-header"> <span class="mini-logo">QL AI</span> <nav class="mini-nav"> <a href="#">Alpha</a> <a href="#">API</a></nav> </div> <div class="mini-hero"> <img src="https://placehold.co/80x80/0F0F22/00E5FF?text=QL&font=robomono" alt=""> <h4>AI Intel</h4></div> <div class="mini-content-area"> <h5>System</h5> <p>Real-time...</p> </div> <div class="mini-footer"> QL // Secure </div> </div> </div> <div class="style-description-area"> <h3>AI-Powered Future Finance</h3> <p class="description-text">Cutting-edge, innovative design...</p> </div> </div> </div>
             </div>
@@ -518,7 +533,7 @@
                         <p class="mb-6 text-center max-w-2xl mx-auto">True wealth counsel extends beyond mere portfolio construction. Drawing from decades of experience serving esteemed clientele, we champion a comprehensive, global perspective tailored to your unique financial landscape and long-term objectives.</p>
                         <div class="elegantdesign-clone-solutions-grid">
                             <div class="elegantdesign-clone-solution-card">
-                                <img src="https://res.cloudinary.com/djoz6eft7/image/upload/v1748199331/ChatGPT_Image_May_26_2025_12_09_13_AM_tmruzl.png" alt="Private Client Services representation">
+                                <img src="https://res.cloudinary.com/djoz6eft7/video/upload/v1748201120/20250525_2342_Financial_Planning_Discussion_storyboard_01jw4aakwye5xawwwy0rcd0nr2_ln9ufz.mp4" alt="Private Client Services representation">
                                 <div class="details">
                                     <h5>Private Client Services</h5>
                                     <p>Empowering your financial journey with personalized strategies and dedicated advisory for individuals and families.</p>
